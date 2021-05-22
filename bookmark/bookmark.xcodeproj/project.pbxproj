@@ -99,13 +99,13 @@
 		442F111126597D3B00860E4E /* bookmark */ = {
 			isa = PBXGroup;
 			children = (
+				442F114A2659A44300860E4E /* Views */,
 				442F111226597D3B00860E4E /* bookmarkApp.swift */,
-				442F111426597D3B00860E4E /* ContentView.swift */,
-				442F114026597DF800860E4E /* BookModel.swift */,
+				442F114C2659A4C500860E4E /* Model */,
+				442F114B2659A45300860E4E /* Network */,
 				442F111626597D3E00860E4E /* Assets.xcassets */,
 				442F111B26597D3E00860E4E /* Info.plist */,
 				442F111826597D3E00860E4E /* Preview Content */,
-				442F114526598B6000860E4E /* NetworkManager.swift */,
 			);
 			path = bookmark;
 			sourceTree = "<group>";
@@ -134,6 +134,30 @@
 				442F113126597D3E00860E4E /* Info.plist */,
 			);
 			path = bookmarkUITests;
+			sourceTree = "<group>";
+		};
+		442F114A2659A44300860E4E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				442F111426597D3B00860E4E /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		442F114B2659A45300860E4E /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				442F114526598B6000860E4E /* NetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		442F114C2659A4C500860E4E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				442F114026597DF800860E4E /* BookModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
