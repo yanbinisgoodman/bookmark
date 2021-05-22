@@ -14,7 +14,7 @@ class NetworkManager: ObservableObject {
     @Published var loading = false
     private let api_key = "dbOUHC2GNZmbnGRzwbws2F3syLE7Wtge"
     private let api_url_base = "https://api.nytimes.com/svc/books/v3/lists/best-sellers/history.json?"
-    private let offset = 100 // increments of 20; determines which 20 results of total to return
+    private let offset = 0 // increments of 20; determines which 20 results of total to return
 
     init() {
         loading = true

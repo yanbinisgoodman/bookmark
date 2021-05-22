@@ -13,19 +13,19 @@ import SwiftUI
 //    let isbn13: String
 //}
 //
-//struct RankHistory: Decodable {
-//    let primary_isbn10: String
-//    let primary_isbn13: String
-//    let rank: Int
-//    let list_name: String
-//    let display_name: String
-//    let published_date: String
-//    let bestsellers_date: String
-//    let weeks_on_list: Int
-//    let rank_last_week: Int
-//    let asterisk: Int
-//    let dagger: Int
-//}
+struct RankHistory: Decodable {
+    let primary_isbn10: String
+    let primary_isbn13: String
+    let rank: Int
+    let list_name: String
+    let display_name: String
+    let published_date: String
+    let bestsellers_date: String
+    let weeks_on_list: Int
+    let rank_last_week: Int
+    let asterisk: Int
+    let dagger: Int
+}
 //
 //struct Review: Decodable {
 //    let book_review_link: String
@@ -44,7 +44,7 @@ struct Book: Decodable {
     let age_group: String?
     let publisher: String?
 //    let isbns: [ISBN]
-//    let ranks_history: [RankHistory]
+    let ranks_history: [RankHistory]
 //    let reviews: [Review]
 }
 
