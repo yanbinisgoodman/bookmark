@@ -31,7 +31,6 @@ class NetworkManager: ObservableObject {
             DispatchQueue.main.async {
                 self.books = books
                 self.loading = false
-                print(self.books)
             }
         }.resume()
     }

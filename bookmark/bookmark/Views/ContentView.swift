@@ -11,7 +11,6 @@ struct ContentView: View {
     @ObservedObject var networkManager = NetworkManager()
 
     var body: some View {
-        NavigationView {
             if networkManager.loading {
                 Text("Loading ...")
             } else {
@@ -19,7 +18,6 @@ struct ContentView: View {
                     Text(book.title)
                 }
             }
-        }
     }
 }
 
