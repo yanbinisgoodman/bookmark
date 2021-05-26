@@ -7,36 +7,57 @@
 
 import SwiftUI
 
+enum Tabs {
+    case Settings
+    case Home
+    case ReadingList
+}
+
 struct MainView: View {
-    init() {
-        // this doesn't show up in preview but works when run
-        UITabBar.appearance().barTintColor = .white
-        UITabBar.appearance().layer.borderColor = UIColor.clear.cgColor
-        // UITabBar.appearance().isTranslucent = false
-        UITabBar.appearance().clipsToBounds = true
-    }
+    @State var selectedTab = Tabs.Home
     
     var body: some View {
-        // like i don't think tab views can go at the top so will
-        // have to make our own custom one
-        // https://stackoverflow.com/questions/62934308/how-can-i-create-tabview-with-headers-on-top-not-bottom-in-swiftui
-        
-        TabView {
-            SettingsView()
-                .tabItem {
-                    Image(systemName: "gear")
+        VStack {
+            HStack {
+                Spacer()
+                Image(systemName: "gear")
+                .foregroundColor(selectedTab == .Settings ? Color("MainColor") : Color.black)
+                .onTapGesture {
+                    self.selectedTab = .Settings
                 }
-            ContentView()
-                .tabItem {
-                    Image(systemName: "house")
+                
+                Spacer()
+                Spacer()
+                
+                Image(systemName: "house")
+                .foregroundColor(selectedTab == .Home ? Color("MainColor") : Color.black)
+                .onTapGesture {
+                    self.selectedTab = .Home
                 }
-            ReadingListView()
-                .tabItem {
-                    Image(systemName: "list.bullet")
+                
+                Spacer()
+                Spacer()
+                
+                Image(systemName: "list.bullet")
+                .foregroundColor(selectedTab == .ReadingList ? Color("MainColor") : Color.black)
+                .onTapGesture {
+                    self.selectedTab = .ReadingList
                 }
+                Spacer()
+            }
+            .padding(.bottom)
+            .background(Color.white.edgesIgnoringSafeArea(.all))
+            
+            Spacer()
+            
+            if selectedTab == .Settings {
+                SettingsView()
+            } else if selectedTab == .Home {
+                ContentView()
+            } else {
+                ReadingListView()
+            }
         }
-        .accentColor(Color("MainColor"))
-        
     }
 }
 
