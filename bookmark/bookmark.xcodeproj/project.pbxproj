@@ -18,6 +18,7 @@
 		443195AF265D636E00C38836 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443195AE265D636E00C38836 /* MainView.swift */; };
 		443195BC265D66B800C38836 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443195BB265D66B800C38836 /* SettingsView.swift */; };
 		443195C1265D66DE00C38836 /* ReadingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443195C0265D66DE00C38836 /* ReadingListView.swift */; };
+		446C5C2B26659304005DBEEE /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446C5C2A26659304005DBEEE /* CardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		443195AE265D636E00C38836 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		443195BB265D66B800C38836 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		443195C0265D66DE00C38836 /* ReadingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingListView.swift; sourceTree = "<group>"; };
+		446C5C2A26659304005DBEEE /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 				443195AE265D636E00C38836 /* MainView.swift */,
 				443195C0265D66DE00C38836 /* ReadingListView.swift */,
 				443195BB265D66B800C38836 /* SettingsView.swift */,
+				446C5C2A26659304005DBEEE /* CardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				442F111526597D3B00860E4E /* HomeView.swift in Sources */,
 				443195BC265D66B800C38836 /* SettingsView.swift in Sources */,
 				443195AF265D636E00C38836 /* MainView.swift in Sources */,
+				446C5C2B26659304005DBEEE /* CardView.swift in Sources */,
 				442F111326597D3B00860E4E /* bookmarkApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
