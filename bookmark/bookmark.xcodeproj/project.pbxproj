@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		31587C1C2666D09E0004ED83 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31587C1B2666D09E0004ED83 /* DetailsView.swift */; };
 		442F111326597D3B00860E4E /* bookmarkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442F111226597D3B00860E4E /* bookmarkApp.swift */; };
 		442F111526597D3B00860E4E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442F111426597D3B00860E4E /* HomeView.swift */; };
 		442F111726597D3E00860E4E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 442F111626597D3E00860E4E /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		31587C1B2666D09E0004ED83 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		442F110F26597D3B00860E4E /* bookmark.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bookmark.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		442F111226597D3B00860E4E /* bookmarkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bookmarkApp.swift; sourceTree = "<group>"; };
 		442F111426597D3B00860E4E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				443195C0265D66DE00C38836 /* ReadingListView.swift */,
 				443195BB265D66B800C38836 /* SettingsView.swift */,
 				446C5C2A26659304005DBEEE /* CardView.swift */,
+				31587C1B2666D09E0004ED83 /* DetailsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				442F114126597DF800860E4E /* BookModel.swift in Sources */,
 				442F111526597D3B00860E4E /* HomeView.swift in Sources */,
 				443195BC265D66B800C38836 /* SettingsView.swift in Sources */,
+				31587C1C2666D09E0004ED83 /* DetailsView.swift in Sources */,
 				443195AF265D636E00C38836 /* MainView.swift in Sources */,
 				446C5C2B26659304005DBEEE /* CardView.swift in Sources */,
 				442F111326597D3B00860E4E /* bookmarkApp.swift in Sources */,
