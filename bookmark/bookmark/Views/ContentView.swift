@@ -11,12 +11,15 @@ struct ContentView: View {
     @ObservedObject var networkManager = NetworkManager()
 
     var body: some View {
+        
             if networkManager.loading {
                 Text("Loading ...")
             } else {
+              
                 List(networkManager.books.results, id: \.title) { book in
                     Text(book.title)
                 }
+                
             }
     }
 }
