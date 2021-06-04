@@ -41,7 +41,14 @@ struct CardView: View {
                     .overlay(
                         VStack {
                             Text(self.book.title)
-                            Text(self.book.author)
+                                .foregroundColor(Color.white)
+                                .font(.title).bold()
+                                .multilineTextAlignment(.center)
+                                
+                            Text("By " + self.book.author)
+                                .foregroundColor(Color.white)
+                                .font(.title3)
+                            
                         }
                         .frame(width: geometry.size.width, height: geometry.size.height * 0.75)
                             .clipped()
@@ -50,7 +57,7 @@ struct CardView: View {
                 HStack {
                     VStack(alignment: .leading, spacing: 6) {
                         Text(self.book.title)
-                            .font(.title)
+                            .font(.headline)
                             .bold()
                         Text(self.book.author)
                             .font(.subheadline)
