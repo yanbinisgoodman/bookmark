@@ -24,6 +24,7 @@ struct ReadingListView: View {
                         Text("View List")
                     }
                     
+                    // OPTION 2: See all books
                     ZStack {
                         HStack {
                             List {
@@ -37,7 +38,6 @@ struct ReadingListView: View {
                                     BookView(id: i, book: networkManager.books.results[i])
                                 }
                             }
-                            
                         }
                     }
                 }
