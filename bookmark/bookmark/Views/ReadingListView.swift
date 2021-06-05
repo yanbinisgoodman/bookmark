@@ -2,12 +2,11 @@
 //  ReadingListView.swift
 //  bookmark
 //
-//  Created by Megan on 5/25/21.
+//  Created by Elizabeth 6/4/21
 //
 
 import SwiftUI
 import UIKit
-
 
 struct ReadingListView: View {
     @ObservedObject var networkManager = NetworkManager()
@@ -43,10 +42,40 @@ struct ReadingListView: View {
                     }
                 }
             }
-            
         }
-        
-        
+    }
+}
+
+struct ListView: View {
+    @ObservedObject var networkManager = NetworkManager()
+    
+    var body: some View {
+        if networkManager.loading {
+            Text("Loading ...")
+        } else {
+            // OPTION 1: Get list of books
+            VStack {
+                Text("Reading List")
+                List(networkManager.books.results, id: \.title) { book in
+                    VStack(alignment: .leading) {
+                        Text(book.title)
+                            .fontWeight(.semibold)
+                        Text(book.author)
+                            .font(.subheadline)
+                            .foregroundColor(Color.gray)
+                    }
+                }
+            }
+        }
+    }
+}
+
+struct ReadingListView_Previews: PreviewProvider {
+    static var previews: some View {
+        ReadingListView()
+    }
+}
+
 //        NavigationView {
 //            List {
 //                NavigationLink(destination: ListView()) {
@@ -76,7 +105,6 @@ struct ReadingListView: View {
 //            }
 //        }
         
-        
 //        if networkManager.loading {
 //            Text("Loading ...")
 //        } else {
@@ -96,46 +124,6 @@ struct ReadingListView: View {
 //                }
 //            }
 //        }
-        
-    }
-}
-
-struct ListView: View {
-    @ObservedObject var networkManager = NetworkManager()
-    
-    var body: some View {
-        if networkManager.loading {
-            Text("Loading ...")
-        } else {
-            // OPTION 1: Get list of books
-            VStack {
-                Text("Reading List")
-                List(networkManager.books.results, id: \.title) { book in
-                    VStack(alignment: .leading) {
-                        Text(book.title)
-                            .fontWeight(.semibold)
-                        Text(book.author)
-                            .font(.subheadline)
-                            .foregroundColor(Color.gray)
-                    }
-                }
-            }
-        }
-    }
-}
-
-
-
-
-
-
-struct ReadingListView_Previews: PreviewProvider {
-    static var previews: some View {
-        ReadingListView()
-    }
-}
-
-
 
 //        let url = URL(string: "http://i.imgur.com/w5rkSIj.jpg")!
 //        let data = try? Data(contentsOf: url)
