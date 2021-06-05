@@ -23,12 +23,13 @@ class NetworkManager: ObservableObject {
     }
     
     // Returns true if there are more books to fetch
-    private func hasNext() -> Bool {
+    func hasNext() -> Bool {
         return offset < numResults
     }
     
     // Loads next set of books
-    private func next() {
+    func next() {
+        loading = true
         guard let url = URL(string: "\(api_url_base)offset=\(offset)&api-key=\(api_key)") else { return }
         URLSession.shared.dataTask(with: url){ (data, _, _) in
 

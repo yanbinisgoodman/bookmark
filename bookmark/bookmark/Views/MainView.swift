@@ -53,7 +53,7 @@ struct MainView: View {
             if selectedTab == .Settings {
                 SettingsView()
             } else if selectedTab == .Home {
-                ContentView()
+                HomeView()
             } else {
                 ReadingListView()
             }
