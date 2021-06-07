@@ -29,24 +29,28 @@ struct BookView: View {
         if (id == -1) { // temp fake book to sub for inexistent odd number book pair
             Color(color)
             .overlay(
-                VStack(spacing: 30) {
+                VStack(spacing: 10) {
                     Text("")
                     Text("")
                 }
             )
+            .padding(20)
         } else {
             Color(color)
             .overlay(
-                VStack(spacing: 30) {
+                VStack(spacing: 10) {
                     Text(book.title)
                         .foregroundColor(Color.white)
                         .multilineTextAlignment(.center)
+                        .padding(5)
         
                     Text(book.author)
                         .foregroundColor(Color.white)
                         .multilineTextAlignment(.center)
+                        .padding(5)
                 }
             )
+            .padding(20)
         }
     }
 }
