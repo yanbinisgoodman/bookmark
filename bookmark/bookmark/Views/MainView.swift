@@ -55,7 +55,7 @@ struct MainView: View {
             
             if selectedTab == .Settings {
                 // todo: settings view?
-                SettingsView()
+                SettingsView(savedBooks: $readingList)
             } else if selectedTab == .Home {
                 HomeView(networkManager: networkManager, savedBooks: $readingList, currentIndex: $currentIndex)
 //                print(currentIndex)
