@@ -11,17 +11,6 @@ import UIKit
 struct ReadingListView: View {
     @Binding var savedBooks: [Book]
     @State var view: String = "list"
-//    var count: Int
-//
-//    init(savedBooks: Binding<[Book]>) {
-//        self._savedBooks = savedBooks
-//        view = "list"
-//        count = self.savedBooks.count
-//    }
-    
-    private func onDelete(_ index: Int) -> Void {
-        print(index)
-    }
     
     var body: some View {
         NavigationView {
@@ -36,11 +25,11 @@ struct ReadingListView: View {
                 
                 if (view == "list") {
                     // OPTION 1: list view
-                    ListView(books: savedBooks)
+                    ListView(books: $savedBooks)
                     
                 } else {
                     // OPTION 2: gallery view
-                    GalleryView(books: savedBooks)
+                    GalleryView(books: $savedBooks)
                 }
                 Spacer()
             }
@@ -49,7 +38,7 @@ struct ReadingListView: View {
 }
 
 struct ListView: View {
-    @State var books: [Book]
+    @Binding var books: [Book]
 
     var body: some View {
         List {
@@ -72,7 +61,7 @@ struct ListView: View {
 }
 
 struct GalleryView: View {
-    @State var books: [Book]
+    @Binding var books: [Book]
 
     var body: some View {
         ScrollView {

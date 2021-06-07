@@ -14,6 +14,7 @@ enum Tabs {
 }
 
 struct MainView: View {
+    @ObservedObject var networkManager = NetworkManager()
     @State var selectedTab = Tabs.Home
     @State var readingList: [Book] = []
     @State var currentIndex: Int = 19   // current index in api results
@@ -53,9 +54,10 @@ struct MainView: View {
             Spacer()
             
             if selectedTab == .Settings {
+                // todo: settings view?
                 SettingsView()
             } else if selectedTab == .Home {
-                HomeView(savedBooks: $readingList, currentIndex: $currentIndex)
+                HomeView(networkManager: networkManager, savedBooks: $readingList, currentIndex: $currentIndex)
 //                print(currentIndex)
             } else {
                 ReadingListView(savedBooks: $readingList)

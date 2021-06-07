@@ -9,10 +9,8 @@ import SwiftUI
 
 struct HomeView: View {
     // contains book results
-    @ObservedObject var networkManager = NetworkManager()
-    @Binding var savedBooks: [Book]
-    @State var removedIndices: [Int] = []
-    
+    @ObservedObject var networkManager: NetworkManager
+    @Binding var savedBooks: [Book]    
     @Binding var currentIndex: Int
     
     private func test(_ x: Int) {
@@ -32,15 +30,15 @@ struct HomeView: View {
                                     // show only top card
                                     if (i == currentIndex) {
                                         CardView(id: i, book: networkManager.books.results[i], onRemove: { id, book, swipedRight in
-                                            removedIndices.append(id)
                                             currentIndex -= 1
                                             if (swipedRight) {
                                                 savedBooks.append(book)
                                             }
                                             
                                             // load next set of books
-                                            if (removedIndices.count == 20 && networkManager.hasNext()) {
-                                                removedIndices.removeAll()
+//                                            print(removedIndices.count)
+//                                            print(networkManager.hasNext())
+                                            if (currentIndex == -1 && networkManager.hasNext()) {
                                                 networkManager.next()
                                                 currentIndex = 19
 //                                                print(removeSBdIndices)
