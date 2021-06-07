@@ -9,58 +9,59 @@ import SwiftUI
 import UIKit
 
 struct ReadingListView: View {
-    @ObservedObject var networkManager = NetworkManager()
+    @Binding var savedBooks: [Book]
+    @State var view: String = "list"
+//    var count: Int
+//
+//    init(savedBooks: Binding<[Book]>) {
+//        self._savedBooks = savedBooks
+//        view = "list"
+//        count = self.savedBooks.count
+//    }
+    
+    private func onDelete(_ index: Int) -> Void {
+        print(index)
+    }
     
     var body: some View {
-        if networkManager.loading {
-            Text("Loading ...")
-        } else {
-            NavigationView {
-                VStack {
-                    Text("Your Reading List")
-                        .font(.headline)
+        NavigationView {
+            VStack {
+                Text("Reading List")
+                    .font(.headline)
+                Button(action: {
+                    view = view == "list" ? "gallery" : "list"
+                }, label: {
+                    Text("\(view == "list" ? "gallery" : "list") view")
+                })
+                
+                if (view == "list") {
+                    // OPTION 1: list view
+                    ListView(books: savedBooks)
                     
-                    NavigationLink(destination: ListView()) {
-                        Text("View List")
-                    }
-                    
-                    // OPTION 2: See all books
-                    ZStack {
-                        HStack {
-                            List {
-                                ForEach(0..<networkManager.books.results.count/2) { i in
-                                    BookView(id: i, book: networkManager.books.results[i])
-                                }
-                            }
-                            
-                            List {
-                                ForEach(networkManager.books.results.count/2..<networkManager.books.results.count) { i in
-                                    BookView(id: i, book: networkManager.books.results[i])
-                                }
-                            }
-                        }
-                    }
+                } else {
+                    // OPTION 2: gallery view
+                    GalleryView(books: savedBooks)
                 }
+                Spacer()
             }
         }
     }
 }
 
 struct ListView: View {
-    @ObservedObject var networkManager = NetworkManager()
-    
+    @State var books: [Book]
+
     var body: some View {
-        if networkManager.loading {
-            Text("Loading ...")
-        } else {
-            // OPTION 1: Get list of books
-            VStack {
-                Text("Reading List")
-                List(networkManager.books.results, id: \.title) { book in
+        List {
+            ForEach(0..<books.count, id: \.self) { i in
+                NavigationLink(destination: DetailsView(id: i, book: books[i], onDelete: { id in
+                    books.remove(at: id)
+                    print(books)
+                })) {
                     VStack(alignment: .leading) {
-                        Text(book.title)
+                        Text(books[i].title)
                             .fontWeight(.semibold)
-                        Text(book.author)
+                        Text(books[i].author)
                             .font(.subheadline)
                             .foregroundColor(Color.gray)
                     }
@@ -70,71 +71,32 @@ struct ListView: View {
     }
 }
 
-struct ReadingListView_Previews: PreviewProvider {
-    static var previews: some View {
-        ReadingListView()
+struct GalleryView: View {
+    @State var books: [Book]
+
+    var body: some View {
+        ScrollView {
+            ForEach(Array(stride(from: 0, to: books.count, by: 2)), id: \.self) { i in
+                // TODO: fix sizing for odd number of books in list (last one takes up whole width)
+                HStack() {
+                    NavigationLink(destination: DetailsView(id: i, book: books[i], onDelete: { id in
+                        books.remove(at: id)
+                        print(books)
+                    })) {
+                        BookView(id: i, book: books[i])
+                    }
+                    
+                    if (i + 1 < books.count) {
+                        NavigationLink(destination: DetailsView(id: i + 1, book: books[i + 1], onDelete: { id in
+                            books.remove(at: id)
+                            print(books)
+                        })) {
+                            BookView(id: i + 1, book: books[i + 1])
+                        }
+                    }
+                }
+                .frame(height: 150.0)
+            }
+        }
     }
 }
-
-//        NavigationView {
-//            List {
-//                NavigationLink(destination: ListView()) {
-//                    Text("View List")
-//                }
-//            }
-//            .navigationBarTitle(Text("View Books"))
-//        }
-        
-//        if networkManager.loading {
-//            Text("Loading ...")
-//        } else {
-//            // OPTION 2: Get all books view
-//            ZStack {
-//                HStack {
-//                    List {
-//                        ForEach(0..<networkManager.books.results.count/2) { i in
-//                            BookView(id: i, book: networkManager.books.results[i])
-//                        }
-//                    }
-//                    List {
-//                        ForEach(networkManager.books.results.count/2..<networkManager.books.results.count) { i in
-//                            BookView(id: i, book: networkManager.books.results[i])
-//                        }
-//                    }
-//                }
-//            }
-//        }
-        
-//        if networkManager.loading {
-//            Text("Loading ...")
-//        } else {
-//            // OPTION 2: Get all books view
-//            ZStack {
-//                HStack {
-//                    List {
-//                        ForEach(0..<networkManager.books.results.count/2) { i in
-//                            BookView(id: i, book: networkManager.books.results[i])
-//                        }
-//                    }
-//                    List {
-//                        ForEach(networkManager.books.results.count/2..<networkManager.books.results.count) { i in
-//                            BookView(id: i, book: networkManager.books.results[i])
-//                        }
-//                    }
-//                }
-//            }
-//        }
-
-//        let url = URL(string: "http://i.imgur.com/w5rkSIj.jpg")!
-//        let data = try? Data(contentsOf: url)
-//        imageView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
-//
-//        if let imageData = data {
-//            imageView = UIImage(data: imageData)
-//        }
-//
-//        var imageView : UIImageView
-//        imageView  = UIImageView(frame:CGRect(x:10, y:50, width:100, height:300));
-//        imageView.image = UIImage(named:"Test.jpeg")
-//        self.view.addSubview(imageView)
-//

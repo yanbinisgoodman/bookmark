@@ -10,31 +10,13 @@ import SwiftUI
 struct HomeView: View {
     // contains book results
     @ObservedObject var networkManager = NetworkManager()
+    @Binding var savedBooks: [Book]
     @State var removedIndices: [Int] = []
-    @State var bookList: [Book] = []
-    @State var currentIndex: Int = 19
     
-    //    init() {
-    //        books = networkManager.books.results
-    //    }
+    @Binding var currentIndex: Int
     
-    // Return the CardView's width given its offset in the array
-    // - Parameters:
-    //   - geometry: The geometry proxy of the parent
-    //   - id: The ID of the current card
-    private func getCardWidth(_ geometry: GeometryProxy, id: Int) -> CGFloat {
-        let books = networkManager.books.results
-        let offset: CGFloat = CGFloat(books.count - removedIndices.count - 1 - id) * 20
-        return geometry.size.width - offset
-    }
-    
-    // Return the CardView's frame offset given its offset in the array
-    // - Parameters:
-    //   - geometry: The geometry proxy of the parent
-    //   - id: The ID of the current user
-    private func getCardOffset(_ geometry: GeometryProxy, id: Int) -> CGFloat {
-        let books = networkManager.books.results
-        return  CGFloat(books.count - removedIndices.count - 1 - id) * 20
+    private func test(_ x: Int) {
+        print(x)
     }
     
     var body: some View {
@@ -47,30 +29,31 @@ struct HomeView: View {
                         VStack {
                             ZStack {
                                 ForEach(0..<networkManager.books.results.count) { i in
-                                    // show only top four cards
-                                    //                                        if (i > networkManager.books.results.count - removedIndices.count - 5                                             && !removedIndices.contains(i)) {
                                     // show only top card
-                                    if (i == networkManager.books.results.count - removedIndices.count - 1 && !removedIndices.contains(i)) {
+                                    if (i == currentIndex) {
                                         CardView(id: i, book: networkManager.books.results[i], onRemove: { id, book, swipedRight in
                                             removedIndices.append(id)
                                             currentIndex -= 1
                                             if (swipedRight) {
-                                                bookList.append(book)
+                                                savedBooks.append(book)
                                             }
                                             
-                                            // load next
+                                            // load next set of books
                                             if (removedIndices.count == 20 && networkManager.hasNext()) {
                                                 removedIndices.removeAll()
                                                 networkManager.next()
                                                 currentIndex = 19
-                                                print(removedIndices)
-                                                print(networkManager.books.results)
+//                                                print(removeSBdIndices)
+//                                                print(networkManager.books.results)
                                             }
+//                                            print(savedBooks)
+//                                            print(removedIndices)
+//                                            print(currentIndex)
+                                            
                                         })
                                         .animation(.spring())
-                                        .frame(width: self.getCardWidth(geometry, id: i),
-                                               height: 600)
-                                        .offset(x: 0, y: self.getCardOffset(geometry, id: i))
+                                        .frame(width: geometry.size.width, height: geometry.size.height * 0.80)
+                                        .offset(x: 0, y: 20)
                                         
                                     }
                                 }
@@ -105,26 +88,27 @@ struct HomeView: View {
                         // todo: add more info
                         // todo: position so this isnt visible until scroll
                         VStack {
-                            
-                            Text("GENRES")
-                                .font(.headline).bold()
-                                .underline()
-                            Spacer()
-                                .frame(height: 30)
-                            Text(networkManager.books.results[currentIndex].ranks_history.count > 0 ? networkManager.books.results[currentIndex].ranks_history[0].list_name : "none")
-                                .padding()
-                                .background(
-                                    RoundedRectangle(cornerRadius: 16)
-                                        .fill(Color.init(red: 0.91, green: 0.84, blue: 0.65)))
-                                .foregroundColor(Color.black)
-                            Spacer()
-                                .frame(height: 50)
-                            Text("SYNOPSIS")
-                                .font(.headline).bold()
-                                .underline()
-                            Spacer()
-                                .frame(height: 30)
-                            Text(networkManager.books.results[currentIndex].description ?? "")
+                            if (currentIndex != -1) {
+                                Text("GENRES")
+                                    .font(.headline).bold()
+                                    .underline()
+                                Spacer()
+                                    .frame(height: 30)
+                                Text(networkManager.books.results[currentIndex].ranks_history.count > 0 ? networkManager.books.results[currentIndex].ranks_history[0].list_name : "none")
+                                    .padding()
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 16)
+                                            .fill(Color.init(red: 0.91, green: 0.84, blue: 0.65)))
+                                    .foregroundColor(Color.black)
+                                Spacer()
+                                    .frame(height: 50)
+                                Text("SYNOPSIS")
+                                    .font(.headline).bold()
+                                    .underline()
+                                Spacer()
+                                    .frame(height: 30)
+                                Text(networkManager.books.results[currentIndex].description ?? "")
+                            }
                             
                             //                            Spacer()
                             //                                .frame(height: 50)
@@ -147,8 +131,8 @@ struct HomeView: View {
     }
 }
 
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
-    }
-}
+//struct HomeView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HomeView()
+//    }
+//}

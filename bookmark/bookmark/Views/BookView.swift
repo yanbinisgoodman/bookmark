@@ -10,38 +10,27 @@ import SwiftUI
 struct BookView: View {
     var book: Book
     var id: Int
-    var color:Color
+    var color: String
     
     init(id: Int, book: Book) {
         self.id = id
         self.book = book
-        let colors: [Color] = [Color.blue, Color.yellow, Color.red, Color.orange]
+        // TODO: fix these colors to use assets instead
+        let colors: [String] = ["Color1", "Color2", "Color3", "Color4"]
         self.color = colors[id % 4]
     }
     
     var body: some View {
-        GeometryReader { geometry in
-            VStack(alignment: .leading) {
-                Color("Color4")
-                HStack {
-                    VStack(alignment: .leading, spacing: 20) {
-                        Text(self.book.title)
-                            .font(.system(size: 10))
-                            .bold()
-                            .multilineTextAlignment(.center)
-                        Text(self.book.author)
-                            .font(.system(size: 5))
-                            .bold()
-                            .multilineTextAlignment(.center)
-                    }
+        Color(color)
+            .overlay(
+                VStack {
+                    Text(book.title)
+                        .foregroundColor(Color.white)
+                        .multilineTextAlignment(.center)
+                        
+                    Text(book.author)
+                        .foregroundColor(Color.white)
                 }
-                .padding(.vertical)
-            }
-            .padding(.bottom)
-            .background(self.color)
-            .cornerRadius(10)
-            .shadow(radius: 5)
-        }
-        .padding(.bottom, 100)
+            )
     }
 }

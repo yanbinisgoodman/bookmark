@@ -19,6 +19,7 @@
 		443195BC265D66B800C38836 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443195BB265D66B800C38836 /* SettingsView.swift */; };
 		443195C1265D66DE00C38836 /* ReadingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443195C0265D66DE00C38836 /* ReadingListView.swift */; };
 		446C5C2B26659304005DBEEE /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446C5C2A26659304005DBEEE /* CardView.swift */; };
+		44F61BF7266DA85900D700C0 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F61BF6266DA85900D700C0 /* DetailsView.swift */; };
 		6E523DA6266AF7CE00013D6D /* BookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E523DA5266AF7CE00013D6D /* BookView.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,7 @@
 		443195BB265D66B800C38836 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		443195C0265D66DE00C38836 /* ReadingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingListView.swift; sourceTree = "<group>"; };
 		446C5C2A26659304005DBEEE /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		44F61BF6266DA85900D700C0 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		6E523DA5266AF7CE00013D6D /* BookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -155,6 +157,7 @@
 				443195BB265D66B800C38836 /* SettingsView.swift */,
 				446C5C2A26659304005DBEEE /* CardView.swift */,
 				6E523DA5266AF7CE00013D6D /* BookView.swift */,
+				44F61BF6266DA85900D700C0 /* DetailsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				443195C1265D66DE00C38836 /* ReadingListView.swift in Sources */,
+				44F61BF7266DA85900D700C0 /* DetailsView.swift in Sources */,
 				442F114626598B6000860E4E /* NetworkManager.swift in Sources */,
 				442F114126597DF800860E4E /* BookModel.swift in Sources */,
 				442F111526597D3B00860E4E /* HomeView.swift in Sources */,

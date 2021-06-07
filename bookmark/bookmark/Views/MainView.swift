@@ -15,6 +15,8 @@ enum Tabs {
 
 struct MainView: View {
     @State var selectedTab = Tabs.Home
+    @State var readingList: [Book] = []
+    @State var currentIndex: Int = 19   // current index in api results
     
     var body: some View {
         VStack {
@@ -53,9 +55,10 @@ struct MainView: View {
             if selectedTab == .Settings {
                 SettingsView()
             } else if selectedTab == .Home {
-                HomeView()
+                HomeView(savedBooks: $readingList, currentIndex: $currentIndex)
+//                print(currentIndex)
             } else {
-                ReadingListView()
+                ReadingListView(savedBooks: $readingList)
             }
         }
     }
