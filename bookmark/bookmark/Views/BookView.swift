@@ -12,25 +12,41 @@ struct BookView: View {
     var id: Int
     var color: String
     
+    
     init(id: Int, book: Book) {
         self.id = id
         self.book = book
         // TODO: fix these colors to use assets instead
-        let colors: [String] = ["Color1", "Color2", "Color3", "Color4"]
-        self.color = colors[id % 4]
+        let colors: [String] = ["Red", "orange", "Yellow", "green", "blue", "navy"]
+        if (id == -1) {
+            self.color = "white"
+        } else {
+            self.color = colors[id % 6]
+        }
     }
     
     var body: some View {
-        Color(color)
+        if (id == -1) { // temp fake book to sub for inexistent odd number book pair
+            Color(color)
             .overlay(
-                VStack {
+                VStack(spacing: 30) {
+                    Text("")
+                    Text("")
+                }
+            )
+        } else {
+            Color(color)
+            .overlay(
+                VStack(spacing: 30) {
                     Text(book.title)
                         .foregroundColor(Color.white)
                         .multilineTextAlignment(.center)
-                        
+        
                     Text(book.author)
                         .foregroundColor(Color.white)
+                        .multilineTextAlignment(.center)
                 }
             )
+        }
     }
 }
