@@ -23,12 +23,12 @@ struct ReadingListView: View {
                         .font(Font.custom("Avenir", size: 30)).bold()
                         .fontWeight(.medium)
                 } else {
-                    Text("\(username.lowercased())'s reading list")
+                    Text("\(username.lowercased().trimmingCharacters(in: .whitespacesAndNewlines))'s reading list")
                         .foregroundColor(Color.init(red: 0.03, green: 0.57, blue: 0.58))
                         .font(Font.custom("Avenir", size: 30)).bold()
                         .fontWeight(.medium)
                 }
-                Toggle("Toggle betweeen Gallery/List View", isOn: $showList)
+                Toggle("List View", isOn: $showList)
                     .padding(10)
                     .font(Font.custom("Avenir", size: 15))
                     .toggleStyle(SwitchToggleStyle(tint: Color.init(red: 0.03, green: 0.57, blue: 0.58)))
@@ -64,13 +64,24 @@ struct ListView: View {
                     print(books)
                     books[id].read = books[id].read == 0 ? 1 : 0
                 })) {
-                    VStack(alignment: .leading, spacing: 5) {
-                        Text(books[i].book.title)
-                            .font(Font.custom("Avenir", size: 18)).bold()
-                            .fontWeight(.medium)
-                        Text(books[i].book.author)
-                            .foregroundColor(Color.black)
-                            .font(Font.custom("Avenir", size: 12))
+                    HStack {
+                        VStack(alignment: .leading, spacing: 5) {
+                            Text(books[i].book.title)
+                                .font(Font.custom("Avenir", size: 18)).bold()
+                                .fontWeight(.medium)
+                            Text(books[i].book.author)
+                                .foregroundColor(Color.black)
+                                .font(Font.custom("Avenir", size: 12))
+                        }
+                        if (books[i].read == 1) {
+                            Text("READ")
+                                .font(Font.custom("Avenir", size: 15))
+                                .padding(/*@START_MENU_TOKEN@*/.horizontal, 10.0/*@END_MENU_TOKEN@*/)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .fill(Color("beige"))
+                                )
+                        }
                     }
                 }
             }
@@ -92,7 +103,7 @@ struct GalleryView: View {
                         print(books)
                         books[id].read = books[id].read == 0 ? 1 : 0
                     })) {
-                        BookView(id: i, book: books[i].book)
+                        BookView(id: i, book: books[i])
                         Spacer()
                     }
                     
@@ -104,7 +115,7 @@ struct GalleryView: View {
                             print(books)
                             books[id].read = books[id].read == 0 ? 1 : 0
                         })) {
-                            BookView(id: i + 1, book: books[i + 1].book)
+                            BookView(id: i + 1, book: books[i + 1])
                         }
                     }
                 }
@@ -120,13 +131,15 @@ struct GalleryView: View {
                         print(books)
                         books[id].read = books[id].read == 0 ? 1 : 0
                     })) {
-                        BookView(id: books.count - (books.count % 2), book: books[books.count - (books.count % 2)].book)
+                        BookView(id: books.count - (books.count % 2), book: books[books.count - (books.count % 2)])
                         Spacer()
                     }
-                    BookView(id: -1, book: books[books.count - (books.count % 2)].book)
+                    BookView(id: -1, book: books[books.count - (books.count % 2)])
                 }
                 .frame(height: 250.0)
             }
         }
     }
 }
+
+
