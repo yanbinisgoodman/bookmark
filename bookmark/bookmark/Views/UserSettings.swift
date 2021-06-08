@@ -21,12 +21,6 @@ class UserSettings: ObservableObject {
         }
     }
     
-    @Published var readingList: [(read: Int, book: Book)] {
-        didSet {
-            UserDefaults.standard.set(readingList, forKey: "readingList")
-        }
-    }
-    
     @Published var currentIndex: Int {
         didSet {
             UserDefaults.standard.set(currentIndex, forKey: "currentIndex")
@@ -35,7 +29,6 @@ class UserSettings: ObservableObject {
     
     init() {
         self.username = UserDefaults.standard.object(forKey: "username") as? String ?? ""
-        self.readingList = UserDefaults.standard.object(forKey: "readingList") as? [(read: Int, book: Book)] ?? []
         self.currentIndex = UserDefaults.standard.object(forKey: "currentIndex") as? Int ?? 19
         self.networkManager = UserDefaults.standard.object(forKey: "networkManager") as? NetworkManager ?? NetworkManager()
     }

@@ -34,7 +34,6 @@ class NetworkManager: ObservableObject {
         URLSession.shared.dataTask(with: url){ (data, _, _) in
 
             guard let data = data else { return }
-            print(data)
             let books = try! JSONDecoder().decode(BookList.self, from: data)
             DispatchQueue.main.async {
                 self.books = books

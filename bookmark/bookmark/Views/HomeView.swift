@@ -14,10 +14,6 @@ struct HomeView: View {
     @Binding var currentIndex: Int
     
     @Environment(\.managedObjectContext) private var viewContext
-    private func test(_ x: Int) {
-        print(x)
-    }
-    
     var body: some View {
         if networkManager.loading {
             Text("Loading ...")
