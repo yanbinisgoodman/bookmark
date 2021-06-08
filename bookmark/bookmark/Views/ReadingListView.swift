@@ -57,6 +57,7 @@ struct ReadingListView: View {
 struct ListView: View {
 //    @Binding var books: [(read: Int, book: Book)]
     var books : FetchedResults<BookData>
+    @Environment(\.managedObjectContext) private var viewContext
     
 //    private func deleteItems(offsets: IndexSet) {
 //        offsets.map { items[$0] }.forEach(viewContext.delete)
@@ -77,11 +78,12 @@ struct ListView: View {
                     
                     //todo how in the hell to delete
 //                    books[id](viewContext.delete)
-//                    do {
-//                        try viewContext.save()
-//                    } catch {
-//                        print("error deleting book")
-//                    }
+                    viewContext.delete(books[id])
+                    do {
+                        try viewContext.save()
+                    } catch {
+                        print("error deleting book")
+                    }
                     print(books)
                 }, onRead: { id in
                     print(books)
@@ -94,14 +96,16 @@ struct ListView: View {
                 })) {
                     HStack {
                         VStack(alignment: .leading, spacing: 5) {
-                            Text(books[i].book.title)
+                            Text(books[i].book!.title!)
                                 .font(Font.custom("Avenir", size: 18)).bold()
                                 .fontWeight(.medium)
-                            Text(books[i].book.author)
+                                .lineLimit(1)
+                            Text(books[i].book!.author!)
                                 .foregroundColor(Color.black)
                                 .font(Font.custom("Avenir", size: 12))
                         }
                         if (books[i].read == 1) {
+                            Spacer()
                             Text("READ")
                                 .font(Font.custom("Avenir", size: 15))
                                 .padding(/*@START_MENU_TOKEN@*/.horizontal, 10.0/*@END_MENU_TOKEN@*/)

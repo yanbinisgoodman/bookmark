@@ -26,6 +26,7 @@ struct MainView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \BookData.book?.title, ascending: true)],
             animation: .default)
         private var savedBooks: FetchedResults<BookData>
+    
     init() {
         let books = userSettings.networkManager.books.results
         for book in books {

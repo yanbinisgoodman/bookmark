@@ -39,8 +39,8 @@ struct HomeView: View {
                                                 let ISBN = ISBNItem(context: viewContext)
                                                 let rankHistory = RankHistoryItem(context: viewContext)
                                                 
-                                                rankHistory.published_date = book.ranks_history.count > 0 ? book.ranks_history[0].published_date : nil
-                                                rankHistory.list_name = book.ranks_history.count > 0 ? book.ranks_history[0].list_name : nil
+                                                rankHistory.published_date = book.ranks_history.count > 0 ? book.ranks_history[0].published_date : ""
+                                                rankHistory.list_name = book.ranks_history.count > 0 ? book.ranks_history[0].list_name : ""
                                                 ISBN.isbn10 = book.isbns.count > 0 ? book.isbns[0].isbn10 : ""
                                                 ISBN.isbn13 = book.isbns.count > 0 ? book.isbns[0].isbn13 : ""
                                                 

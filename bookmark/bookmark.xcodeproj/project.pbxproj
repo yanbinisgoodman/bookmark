@@ -119,6 +119,8 @@
 		442F111126597D3B00860E4E /* bookmark */ = {
 			isa = PBXGroup;
 			children = (
+				446C3274266EE3E700043B65 /* Avenir.ttc */,
+				446C3284266FD22100043B65 /* Persistence.swift */,
 				442F114A2659A44300860E4E /* Views */,
 				442F114C2659A4C500860E4E /* Model */,
 				442F114B2659A45300860E4E /* Network */,
@@ -159,17 +161,15 @@
 		442F114A2659A44300860E4E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				446C327F266F339F00043B65 /* UserSettings.swift */,
 				442F111226597D3B00860E4E /* bookmarkApp.swift */,
 				442F111426597D3B00860E4E /* HomeView.swift */,
 				443195AE265D636E00C38836 /* MainView.swift */,
 				443195C0265D66DE00C38836 /* ReadingListView.swift */,
 				443195BB265D66B800C38836 /* SettingsView.swift */,
-				446C3274266EE3E700043B65 /* Avenir.ttc */,
 				446C5C2A26659304005DBEEE /* CardView.swift */,
 				6E523DA5266AF7CE00013D6D /* BookView.swift */,
 				44F61BF6266DA85900D700C0 /* DetailsView.swift */,
-				446C327F266F339F00043B65 /* UserSettings.swift */,
-				446C3284266FD22100043B65 /* Persistence.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
