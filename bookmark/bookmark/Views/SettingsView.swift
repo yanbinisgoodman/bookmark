@@ -44,16 +44,16 @@ struct SettingsView: View {
                     .fontWeight(.medium)
                     .padding(.bottom)
                 
-                // app theme
-                VStack(alignment: .leading) {
-                    Text("App Theme")
-                        .font(Font.custom("Avenir", size: 18))
-                        .padding(.bottom)
-                    Toggle("Dark Mode", isOn: $darkMode)
-                        .font(Font.custom("Avenir", size: 15))
-                        .toggleStyle(SwitchToggleStyle(tint: Color.init(red: 0.03, green: 0.57, blue: 0.58)))
-                        .foregroundColor(Color.init(red: 0.03, green: 0.57, blue: 0.58))
-                }
+//                // app theme
+//                VStack(alignment: .leading) {
+//                    Text("App Theme")
+//                        .font(Font.custom("Avenir", size: 18))
+//                        .padding(.bottom)
+//                    Toggle("Dark Mode", isOn: $darkMode)
+//                        .font(Font.custom("Avenir", size: 15))
+//                        .toggleStyle(SwitchToggleStyle(tint: Color.init(red: 0.03, green: 0.57, blue: 0.58)))
+//                        .foregroundColor(Color.init(red: 0.03, green: 0.57, blue: 0.58))
+//                }
                 
                 // clear reading list
                 VStack(alignment: .leading) {
