@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @State private var username: String = ""
     @State private var darkMode: Bool = false
+    @Binding var username: String
     @Binding var savedBooks: [(read: Int, book: Book)]
 //    @State private var isEditing = false
     var body: some View {

@@ -10,16 +10,24 @@ import UIKit
 
 struct ReadingListView: View {
     @Binding var savedBooks: [(read: Int, book: Book)]
+    @State var username: String
     @State var view: String = "list"
     @State var showList = true
     
     var body: some View {
         NavigationView {
             VStack {
-                Text("reading list")
-                    .foregroundColor(Color.init(red: 0.03, green: 0.57, blue: 0.58))
-                    .font(Font.custom("Avenir", size: 30)).bold()
-                    .fontWeight(.medium)
+                if (username == "") {
+                    Text("reading list")
+                        .foregroundColor(Color.init(red: 0.03, green: 0.57, blue: 0.58))
+                        .font(Font.custom("Avenir", size: 30)).bold()
+                        .fontWeight(.medium)
+                } else {
+                    Text("\(username.lowercased())'s reading list")
+                        .foregroundColor(Color.init(red: 0.03, green: 0.57, blue: 0.58))
+                        .font(Font.custom("Avenir", size: 30)).bold()
+                        .fontWeight(.medium)
+                }
                 Toggle("Toggle betweeen Gallery/List View", isOn: $showList)
                     .padding(10)
                     .font(Font.custom("Avenir", size: 15))

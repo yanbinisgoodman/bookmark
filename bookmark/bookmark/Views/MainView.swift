@@ -18,7 +18,7 @@ struct MainView: View {
     @State var selectedTab = Tabs.Home
     @State var readingList: [(read: Int, book: Book)] = []
     @State var currentIndex: Int = 19   // current index in api results
-    
+    @State var username: String = ""
     var body: some View {
         VStack {
             HStack {
@@ -55,12 +55,12 @@ struct MainView: View {
             
             if selectedTab == .Settings {
                 // todo: settings view?
-                SettingsView(savedBooks: $readingList)
+                SettingsView(username: $username, savedBooks: $readingList)
             } else if selectedTab == .Home {
                 HomeView(networkManager: networkManager, savedBooks: $readingList, currentIndex: $currentIndex)
 //                print(currentIndex)
             } else {
-                ReadingListView(savedBooks: $readingList)
+                ReadingListView(savedBooks: $readingList, username: username)
             }
         }
     }
