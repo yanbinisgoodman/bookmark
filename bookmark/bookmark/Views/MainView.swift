@@ -14,13 +14,9 @@ enum Tabs {
 }
 
 struct MainView: View {
-//    @ObservedObject var networkManager = NetworkManager()
     @ObservedObject var userSettings = UserSettings()
-    @AppStorage("readingList") private var testReadingList: Data = Data()
     @State var selectedTab = Tabs.Home
-    @State var readingList: [(read: Int, book: Book)] = []
-//    @State var currentIndex: Int = 19   // current index in api results
-//    @State var username: String = ""
+
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \BookData.book?.title, ascending: true)],
@@ -92,13 +88,10 @@ struct MainView: View {
             Spacer()
             
             if selectedTab == .Settings {
-                // todo: settings view?
                 SettingsView(username: $userSettings.username, savedBooks: savedBooks)
-//                SettingsView(username: $userSettings.username)
 
             } else if selectedTab == .Home {
                 HomeView(networkManager: userSettings.networkManager, savedBooks: savedBooks, currentIndex: $userSettings.currentIndex)
-//                print(currentIndex)
             } else {
                 ReadingListView(savedBooks: savedBooks, username: userSettings.username)
             }

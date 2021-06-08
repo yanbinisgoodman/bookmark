@@ -35,8 +35,6 @@ struct CardView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .leading) {
-                // Title card
-                // TODO: use more colors
                 Color("Color4")
                     .overlay(
                         VStack {
@@ -83,7 +81,6 @@ struct CardView: View {
                     }.onEnded { value in
                         // determine snap distance > half the width of the screen
                         if abs(self.getGesturePercentage(geometry, from: value)) > self.thresholdPercentage {
-//                            print(self.getGesturePercentage(geometry, from: value))
                             self.onRemove(self.id, self.book, self.getGesturePercentage(geometry, from: value) > 0)
                         } else {
                             self.translation = .zero

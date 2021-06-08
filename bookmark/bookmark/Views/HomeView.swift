@@ -9,8 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     // contains book results
-    @ObservedObject var networkManager: NetworkManager  // todo: store this
-//    @Binding var savedBooks: [(read: Int, book: Book)]
+    @ObservedObject var networkManager: NetworkManager
     var savedBooks : FetchedResults<BookData>
     @Binding var currentIndex: Int
     
@@ -58,23 +57,12 @@ struct HomeView: View {
                                                 } catch {
                                                     print("error saving book")
                                                 }
-
-//                                                savedBooks.append((read: 0, book: book))
                                             }
                                             
-                                            // load next set of books
-//                                            print(removedIndices.count)
-//                                            print(networkManager.hasNext())
                                             if (currentIndex == -1 && networkManager.hasNext()) {
                                                 networkManager.next()
                                                 currentIndex = 19
-//                                                print(removeSBdIndices)
-//                                                print(networkManager.books.results)
                                             }
-//                                            print(savedBooks)
-//                                            print(removedIndices)
-//                                            print(currentIndex)
-                                            
                                         })
                                         .animation(.spring())
                                         .frame(width: geometry.size.width, height: geometry.size.height * 0.80)
@@ -109,9 +97,7 @@ struct HomeView: View {
                             
                         }
                         Spacer()
-                        // DetailsView(book: networkManager.books.results[cur])
-                        // todo: add more info
-                        // todo: position so this isnt visible until scroll
+
                         VStack {
                             if (currentIndex != -1) {
                                 Text("GENRES")
@@ -134,20 +120,6 @@ struct HomeView: View {
                                     .frame(height: 30)
                                 Text(networkManager.books.results[currentIndex].description ?? "")
                             }
-                            
-                            //                            Spacer()
-                            //                                .frame(height: 50)
-                            //                            Text("AUTHOR")
-                            //                                .font(.headline).bold()
-                            //                                .underline()
-                            //                            Spacer()
-                            //                                .frame(height: 30)
-                            //                            Text(networkManager.books.results[currentIndex].author)
-                            //                            Spacer()
-                            //                                .frame(height: 50)
-                            //
-                            //                            }
-                            
                         }
                     }
                 }
@@ -155,9 +127,3 @@ struct HomeView: View {
         }
     }
 }
-
-//struct HomeView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HomeView()
-//    }
-//}
