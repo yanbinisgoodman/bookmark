@@ -69,24 +69,11 @@ struct DetailsView: View {
                                 .frame(width: 140, height: 20)
                                 .offset(x:-5, y: -130)
                             )
-                            /*Text(book.age_group ?? "n/a")
-                                .offset(y:-20)
-                                .font(.system(size: 10))
-                                .background(
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(Color.yellow)
-                                .frame(width: 140, height: 20)
-                                .offset(x:-5, y: -20)
 
-                            )
-                             */
                                 
                         }
                     }
-                    //HStack{
-                      //  Text(book.description ?? "coming soon")
-                            //.position(x: 60, y: -20)
-                   // }
+
                     Text("Synopsis")
                         .bold()
                         .position(x: -47, y: -70)
@@ -130,8 +117,8 @@ struct DetailsView: View {
 }
        
 
-//struct DetailsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DetailsView(book: Book(title: "A GIRL'S GUIDE TO MOVING ON ", description: "A mother and her daughter-in-law both leave unhappy marriages and take up with new men.", author: "Debbie Macomber", price: "$27.99", age_group: "12", publisher: "NY Times", ranks_history: []), id: 1)
-//    }
-//}
+struct DetailsView_Previews: PreviewProvider {
+    static var previews: some View {
+        DetailsView(id: 1, book: Book(title: "A GIRL'S GUIDE TO MOVING ON ", description: "A mother and her daughter-in-law both leave unhappy marriages and take up with new men.", author: "Debbie Macomber", price: "$27.99", age_group: "12", publisher: "NY Times", isbns: [ISBN(isbn10: "12345", isbn13: "123456789")], ranks_history: []), onDelete: {id in print(id)})
+    }
+}
