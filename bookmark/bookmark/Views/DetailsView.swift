@@ -52,7 +52,7 @@ struct DetailsView: View {
                             Text(book.author)
                                 .position(x: 70, y: -100)
                             // todo: sub real values - rank is like not a thing? account for empty values
-                            Text(book.ranks_history.count > 0 ? "\(book.ranks_history[1].rank)": "n/a")
+                            Text(book.ranks_history.count > 0 ? "\(book.ranks_history[0].rank)": "n/a")
                                 .offset(y:-150)
                                 .font(.system(size: 15))
                                 .background(RoundedRectangle(cornerRadius: 20)
