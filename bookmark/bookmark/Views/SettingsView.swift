@@ -10,8 +10,11 @@ import SwiftUI
 struct SettingsView: View {
     @State private var darkMode: Bool = false
     @Binding var username: String
-    @Binding var savedBooks: [(read: Int, book: Book)]
+//    @Binding var savedBooks: [(read: Int, book: Book)]
 //    @State private var isEditing = false
+    var savedBooks : FetchedResults<BookData>
+    @Environment(\.managedObjectContext) private var viewContext
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
@@ -64,7 +67,13 @@ struct SettingsView: View {
                     VStack {
                         Button(action:{
                             // todo: this
-                            savedBooks.removeAll()
+//                            savedBooks.removeAll()
+                            savedBooks.forEach(viewContext.delete)
+                                do {
+                                    try viewContext.save()
+                                } catch {
+                                    // Error handling
+                                }
                         } ) {
                             Text("CLEAR READING LIST")
                                 .font(Font.custom("Avenir", size: 20))
