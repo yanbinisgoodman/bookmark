@@ -8,15 +8,14 @@
 import SwiftUI
 
 struct BookView: View {
-    var book: (read: Int, book: Book)
+    var book: BookData
     var id: Int
     var color: String
     
     
-    init(id: Int, book: (read: Int, book: Book)) {
+    init(id: Int, book: BookData) {
         self.id = id
         self.book = book
-        // TODO: fix these colors to use assets instead
         let colors: [String] = ["Red", "orange", "Yellow", "green", "blue", "navy"]
         if (id == -1) {
             self.color = "white"
@@ -48,13 +47,13 @@ struct BookView: View {
                             .background(Color("beige"))
                     }
                     Spacer()
-                    Text(book.book.title)
+                    Text(book.book!.title!)
                         .foregroundColor(Color.white)
                         .multilineTextAlignment(.center)
                         .padding(5)
                         .font(Font.custom("Avenir", size: 20))
         
-                    Text(book.book.author)
+                    Text(book.book!.author!)
                         .foregroundColor(Color.white)
                         .multilineTextAlignment(.center)
                         .padding(5)
@@ -67,8 +66,3 @@ struct BookView: View {
     }
 }
 
-struct BookView_Previews: PreviewProvider {
-    static var previews: some View {
-        BookView(id: 1, book: (read: 1, book: Book(title: "A GIRL'S GUIDE TO MOVING ON ", description: "A mother and her daughter-in-law both leave unhappy marriages and take up with new men.", author: "Debbie Macomber", price: "$27.99", age_group: "12", publisher: "NY Times", isbns: [ISBN(isbn10: "12345", isbn13: "123456789")], ranks_history: [RankHistory(primary_isbn10:"0761156860",primary_isbn13:"9780761156864",rank:10,list_name:"Travel",display_name:"Travel",published_date:"2015-04-12",bestsellers_date:"2015-03-28",weeks_on_list:0,rank_last_week:0,asterisk:0,dagger:0)])))
-    }
-}

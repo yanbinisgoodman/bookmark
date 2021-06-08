@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="BookData" representedClassName="BookData" syncable="YES" codeGenerationType="class">
+        <attribute name="read" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="book" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BookItem"/>
+    </entity>
+    <entity name="BookItem" representedClassName="BookItem" syncable="YES" codeGenerationType="class">
+        <attribute name="author" optional="YES" attributeType="String"/>
+        <attribute name="desc" optional="YES" attributeType="String"/>
+        <attribute name="publisher" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="isbns" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ISBNItem"/>
+        <relationship name="ranks_history" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RankHistoryItem"/>
+    </entity>
+    <entity name="ISBNItem" representedClassName="ISBNItem" syncable="YES" codeGenerationType="class">
+        <attribute name="isbn10" optional="YES" attributeType="String"/>
+        <attribute name="isbn13" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="RankHistoryItem" representedClassName="RankHistoryItem" syncable="YES" codeGenerationType="class">
+        <attribute name="list_name" optional="YES" attributeType="String"/>
+        <attribute name="published_date" optional="YES" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="BookData" positionX="-18" positionY="135" width="128" height="73"/>
+        <element name="BookItem" positionX="-63" positionY="-18" width="128" height="133"/>
+        <element name="ISBNItem" positionX="-54" positionY="45" width="128" height="73"/>
+        <element name="RankHistoryItem" positionX="-36" positionY="63" width="128" height="73"/>
+    </elements>
+</model>

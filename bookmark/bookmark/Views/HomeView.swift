@@ -10,13 +10,10 @@ import SwiftUI
 struct HomeView: View {
     // contains book results
     @ObservedObject var networkManager: NetworkManager
-    @Binding var savedBooks: [(read: Int, book: Book)]
+    var savedBooks : FetchedResults<BookData>
     @Binding var currentIndex: Int
     
-    private func test(_ x: Int) {
-        print(x)
-    }
-    
+    @Environment(\.managedObjectContext) private var viewContext
     var body: some View {
         if networkManager.loading {
             Text("Loading ...")
@@ -32,22 +29,36 @@ struct HomeView: View {
                                         CardView(id: i, book: networkManager.books.results[i], onRemove: { id, book, swipedRight in
                                             currentIndex -= 1
                                             if (swipedRight) {
-                                                savedBooks.append((read: 0, book: book))
+                                                let bookDataItem = BookData(context: viewContext)
+                                                let bookItem = BookItem(context: viewContext)
+                                                let ISBN = ISBNItem(context: viewContext)
+                                                let rankHistory = RankHistoryItem(context: viewContext)
+                                                
+                                                rankHistory.published_date = book.ranks_history.count > 0 ? book.ranks_history[0].published_date : ""
+                                                rankHistory.list_name = book.ranks_history.count > 0 ? book.ranks_history[0].list_name : ""
+                                                ISBN.isbn10 = book.isbns.count > 0 ? book.isbns[0].isbn10 : ""
+                                                ISBN.isbn13 = book.isbns.count > 0 ? book.isbns[0].isbn13 : ""
+                                                
+                                                bookItem.title = book.title
+                                                bookItem.desc = book.description
+                                                bookItem.author = book.author
+                                                bookItem.publisher = book.publisher
+                                                bookItem.isbns = ISBN
+                                                bookItem.ranks_history = rankHistory
+                                                
+                                                bookDataItem.read = 0
+                                                bookDataItem.book = bookItem
+                                                do {
+                                                    try viewContext.save()
+                                                } catch {
+                                                    print("error saving book")
+                                                }
                                             }
                                             
-                                            // load next set of books
-//                                            print(removedIndices.count)
-//                                            print(networkManager.hasNext())
                                             if (currentIndex == -1 && networkManager.hasNext()) {
                                                 networkManager.next()
                                                 currentIndex = 19
-//                                                print(removeSBdIndices)
-//                                                print(networkManager.books.results)
                                             }
-//                                            print(savedBooks)
-//                                            print(removedIndices)
-//                                            print(currentIndex)
-                                            
                                         })
                                         .animation(.spring())
                                         .frame(width: geometry.size.width, height: geometry.size.height * 0.80)
@@ -82,9 +93,7 @@ struct HomeView: View {
                             
                         }
                         Spacer()
-                        // DetailsView(book: networkManager.books.results[cur])
-                        // todo: add more info
-                        // todo: position so this isnt visible until scroll
+
                         VStack {
                             if (currentIndex != -1) {
                                 Text("GENRES")
@@ -107,20 +116,6 @@ struct HomeView: View {
                                     .frame(height: 30)
                                 Text(networkManager.books.results[currentIndex].description ?? "")
                             }
-                            
-                            //                            Spacer()
-                            //                                .frame(height: 50)
-                            //                            Text("AUTHOR")
-                            //                                .font(.headline).bold()
-                            //                                .underline()
-                            //                            Spacer()
-                            //                                .frame(height: 30)
-                            //                            Text(networkManager.books.results[currentIndex].author)
-                            //                            Spacer()
-                            //                                .frame(height: 50)
-                            //
-                            //                            }
-                            
                         }
                     }
                 }
@@ -128,9 +123,3 @@ struct HomeView: View {
         }
     }
 }
-
-//struct HomeView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HomeView()
-//    }
-//}

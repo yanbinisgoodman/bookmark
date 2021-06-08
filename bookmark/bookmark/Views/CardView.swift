@@ -17,8 +17,6 @@ struct CardView: View {
     
     
     init(id: Int, book: Book, onRemove: @escaping (_ id: Int, _ book: Book, _ swipedRight: Bool) -> Void) {
-//        self.id = id
-//        self.book = book
         self.id = id
         self.book = book
         self.onRemove = onRemove
@@ -35,8 +33,6 @@ struct CardView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .leading) {
-                // Title card
-                // TODO: use more colors
                 Color("Color4")
                     .overlay(
                         VStack {
@@ -83,7 +79,6 @@ struct CardView: View {
                     }.onEnded { value in
                         // determine snap distance > half the width of the screen
                         if abs(self.getGesturePercentage(geometry, from: value)) > self.thresholdPercentage {
-//                            print(self.getGesturePercentage(geometry, from: value))
                             self.onRemove(self.id, self.book, self.getGesturePercentage(geometry, from: value) > 0)
                         } else {
                             self.translation = .zero
@@ -94,15 +89,3 @@ struct CardView: View {
     }
 }
 
-// 4
-//struct CardView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CardView(book: Book(title: "Mark", description: "Bennett", author: "Ash", price: "27", age_group: <#T##String?#>: "12", publisher: "person_1", ranks_history: <#T##[RankHistory]#>: "Insurance Agent"),
-//                 onRemove: { _ in
-//                    // do nothing
-//            })
-//            .frame(height: 400)
-//            .padding()
-//    }
-//    }
-//}

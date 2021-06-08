@@ -26,26 +26,16 @@ struct RankHistory: Decodable {
     let asterisk: Int
     let dagger: Int
 }
-//
-//struct Review: Decodable {
-//    let book_review_link: String
-//    let first_chapter_link: String
-//    let sunday_review_link: String
-//    let article_chapter_link: String
-//}
 
 struct Book: Decodable {
     let title: String
     let description: String?
-//    let contributor: String?
     let author: String
-//    let contributor_note: String
     let price: String
     let age_group: String?
     let publisher: String?
     let isbns: [ISBN]
     let ranks_history: [RankHistory]
-//    let reviews: [Review]
 }
 
 struct BookList: Decodable {

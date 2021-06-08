@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct bookmarkApp: App {
+    let persistenceController = PersistenceController.shared
+
     var body: some Scene {
         WindowGroup {
-            MainView()
+            MainView().environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

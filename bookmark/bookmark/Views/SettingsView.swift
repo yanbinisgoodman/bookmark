@@ -10,8 +10,9 @@ import SwiftUI
 struct SettingsView: View {
     @State private var darkMode: Bool = false
     @Binding var username: String
-    @Binding var savedBooks: [(read: Int, book: Book)]
-//    @State private var isEditing = false
+    var savedBooks : FetchedResults<BookData>
+    @Environment(\.managedObjectContext) private var viewContext
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
@@ -19,21 +20,14 @@ struct SettingsView: View {
                     .font(Font.custom("Avenir", size: 20))
                     .fontWeight(.medium)
                     .padding(.bottom)
-                TextField(
-                        "Name",
-                         text: $username
-                    ) { isEditing in
-//                        self.isEditing = isEditing
-                    } onCommit: {
-                        print(username)
-                    }
-                .padding(.horizontal)
-                .padding(.vertical, 5.0)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 5)
-                            .stroke(Color.gray, lineWidth: 1)
-                    )
-                .font(Font.custom("Avenir", size: 20))
+                TextField("Name", text: $username)
+                    .padding(.horizontal)
+                    .padding(.vertical, 5.0)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(Color.gray, lineWidth: 1)
+                        )
+                    .font(Font.custom("Avenir", size: 20))
                 
             }
             .padding([.leading, .bottom, .trailing])
@@ -44,17 +38,6 @@ struct SettingsView: View {
                     .fontWeight(.medium)
                     .padding(.bottom)
                 
-//                // app theme
-//                VStack(alignment: .leading) {
-//                    Text("App Theme")
-//                        .font(Font.custom("Avenir", size: 18))
-//                        .padding(.bottom)
-//                    Toggle("Dark Mode", isOn: $darkMode)
-//                        .font(Font.custom("Avenir", size: 15))
-//                        .toggleStyle(SwitchToggleStyle(tint: Color.init(red: 0.03, green: 0.57, blue: 0.58)))
-//                        .foregroundColor(Color.init(red: 0.03, green: 0.57, blue: 0.58))
-//                }
-                
                 // clear reading list
                 VStack(alignment: .leading) {
                     Text("Reading List")
@@ -63,8 +46,12 @@ struct SettingsView: View {
                     
                     VStack {
                         Button(action:{
-                            // todo: this
-                            savedBooks.removeAll()
+                            savedBooks.forEach(viewContext.delete)
+                                do {
+                                    try viewContext.save()
+                                } catch {
+                                    print("error clearing books")
+                                }
                         } ) {
                             Text("CLEAR READING LIST")
                                 .font(Font.custom("Avenir", size: 20))
@@ -94,8 +81,3 @@ struct SettingsView: View {
     }
 }
 
-//struct SettingsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SettingsView()
-//    }
-//}
