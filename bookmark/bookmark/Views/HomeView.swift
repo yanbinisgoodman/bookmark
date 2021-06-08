@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeView: View {
     // contains book results
     @ObservedObject var networkManager: NetworkManager
-    @Binding var savedBooks: [Book]    
+    @Binding var savedBooks: [(read: Int, book: Book)]
     @Binding var currentIndex: Int
     
     private func test(_ x: Int) {
@@ -32,7 +32,7 @@ struct HomeView: View {
                                         CardView(id: i, book: networkManager.books.results[i], onRemove: { id, book, swipedRight in
                                             currentIndex -= 1
                                             if (swipedRight) {
-                                                savedBooks.append(book)
+                                                savedBooks.append((read: 0, book: book))
                                             }
                                             
                                             // load next set of books

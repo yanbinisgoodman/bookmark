@@ -9,7 +9,7 @@ import SwiftUI
 import UIKit
 
 struct ReadingListView: View {
-    @Binding var savedBooks: [Book]
+    @Binding var savedBooks: [(read: Int, book: Book)]
     @State var view: String = "list"
     @State var showList = true
     
@@ -44,7 +44,7 @@ struct ReadingListView: View {
 }
 
 struct ListView: View {
-    @Binding var books: [Book]
+    @Binding var books: [(read: Int, book: Book)]
 
     var body: some View {
         List {
@@ -52,12 +52,15 @@ struct ListView: View {
                 NavigationLink(destination: DetailsView(id: i, book: books[i], onDelete: { id in
                     books.remove(at: id)
                     print(books)
+                }, onRead: { id in
+                    print(books)
+                    books[id].read = books[id].read == 0 ? 1 : 0
                 })) {
                     VStack(alignment: .leading, spacing: 5) {
-                        Text(books[i].title)
+                        Text(books[i].book.title)
                             .font(Font.custom("Avenir", size: 18)).bold()
                             .fontWeight(.medium)
-                        Text(books[i].author)
+                        Text(books[i].book.author)
                             .foregroundColor(Color.black)
                             .font(Font.custom("Avenir", size: 12))
                     }
@@ -68,7 +71,7 @@ struct ListView: View {
 }
 
 struct GalleryView: View {
-    @Binding var books: [Book]
+    @Binding var books: [(read: Int, book: Book)]
 
     var body: some View {
         ScrollView {
@@ -77,8 +80,11 @@ struct GalleryView: View {
                     NavigationLink(destination: DetailsView(id: i, book: books[i], onDelete: { id in
                         books.remove(at: id)
                         print(books)
+                    }, onRead: { id in
+                        print(books)
+                        books[id].read = books[id].read == 0 ? 1 : 0
                     })) {
-                        BookView(id: i, book: books[i])
+                        BookView(id: i, book: books[i].book)
                         Spacer()
                     }
                     
@@ -86,8 +92,11 @@ struct GalleryView: View {
                         NavigationLink(destination: DetailsView(id: i + 1, book: books[i + 1], onDelete: { id in
                             books.remove(at: id)
                             print(books)
+                        }, onRead: { id in
+                            print(books)
+                            books[id].read = books[id].read == 0 ? 1 : 0
                         })) {
-                            BookView(id: i + 1, book: books[i + 1])
+                            BookView(id: i + 1, book: books[i + 1].book)
                         }
                     }
                 }
@@ -99,11 +108,14 @@ struct GalleryView: View {
                     NavigationLink(destination: DetailsView(id: books.count - (books.count % 2), book: books[books.count - (books.count % 2)], onDelete: { id in
                         books.remove(at: id)
                         print(books)
+                    }, onRead: { id in
+                        print(books)
+                        books[id].read = books[id].read == 0 ? 1 : 0
                     })) {
-                        BookView(id: books.count - (books.count % 2), book: books[books.count - (books.count % 2)])
+                        BookView(id: books.count - (books.count % 2), book: books[books.count - (books.count % 2)].book)
                         Spacer()
                     }
-                    BookView(id: -1, book: books[books.count - (books.count % 2)])
+                    BookView(id: -1, book: books[books.count - (books.count % 2)].book)
                 }
                 .frame(height: 250.0)
             }

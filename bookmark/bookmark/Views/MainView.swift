@@ -16,7 +16,7 @@ enum Tabs {
 struct MainView: View {
     @ObservedObject var networkManager = NetworkManager()
     @State var selectedTab = Tabs.Home
-    @State var readingList: [Book] = []
+    @State var readingList: [(read: Int, book: Book)] = []
     @State var currentIndex: Int = 19   // current index in api results
     
     var body: some View {
