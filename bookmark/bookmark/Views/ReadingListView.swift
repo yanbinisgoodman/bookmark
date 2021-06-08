@@ -17,19 +17,15 @@ struct ReadingListView: View {
         NavigationView {
             VStack {
                 Text("reading list")
-                    .font(.title).bold()
                     .foregroundColor(Color.init(red: 0.03, green: 0.57, blue: 0.58))
+                    .font(Font.custom("Avenir", size: 30)).bold()
+                    .fontWeight(.medium)
                 Toggle("Toggle betweeen Gallery/List View", isOn: $showList)
-                    .font(.subheadline)
+                    .padding(10)
+                    .font(Font.custom("Avenir", size: 15))
                     .toggleStyle(SwitchToggleStyle(tint: Color.init(red: 0.03, green: 0.57, blue: 0.58)))
                     .foregroundColor(Color.init(red: 0.03, green: 0.57, blue: 0.58))
-                    .padding(10)
-//                Button(action: {
-//                    view = view == "list" ? "gallery" : "list"
-//                }, label: {
-//                    Text("\(view == "list" ? "gallery" : "list") view")
-//                })
-                
+
                 if (view == "list" && showList) {
                     // OPTION 1: list view
                     ListView(books: $savedBooks)
@@ -59,10 +55,11 @@ struct ListView: View {
                 })) {
                     VStack(alignment: .leading, spacing: 5) {
                         Text(books[i].title)
-                            .fontWeight(.semibold)
+                            .font(Font.custom("Avenir", size: 18)).bold()
+                            .fontWeight(.medium)
                         Text(books[i].author)
-                            .font(.subheadline)
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color.black)
+                            .font(Font.custom("Avenir", size: 12))
                     }
                 }
             }

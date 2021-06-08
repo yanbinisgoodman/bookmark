@@ -43,11 +43,13 @@ struct BookView: View {
                         .foregroundColor(Color.white)
                         .multilineTextAlignment(.center)
                         .padding(5)
+                        .font(Font.custom("Avenir", size: 20))
         
                     Text(book.author)
                         .foregroundColor(Color.white)
                         .multilineTextAlignment(.center)
                         .padding(5)
+                        .font(Font.custom("Avenir", size: 15))
                 }
             )
             .padding(20)
