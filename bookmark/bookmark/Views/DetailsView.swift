@@ -10,128 +10,100 @@ import SwiftUI
 
 struct DetailsView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @State private var textButton = "Remove from list"
     
     var id: Int
     var book: Book
     var onDelete: (_ id: Int) -> Void
     
-    
-    
-    @State private var pub = "Publisher: "
-    @State private var isbn = "ISBN: "
-    
     var body: some View {
         ScrollView {
-            HStack {
-                VStack {
-                    Image("Color1")
-                    .resizable()
-                    .position( x: 143, y: -20)
-                    .scaledToFit()
-                    .edgesIgnoringSafeArea(.top)
-                        .frame(width: 145, height: 500)
-                    Text(pub)
-                        .offset(x: 40, y: -158)
-                    Text(book.publisher ?? "n/a")
-                        .offset(x: 120, y: -179)
-                    Text(isbn)
-                        .offset(x: 25, y: -170)
-                    Text(book.ranks_history.count > 0 ? book.ranks_history[0].primary_isbn13 : "n/a")
-                        .offset(x: 130, y: -190)
-                }
-                
-                
-                VStack{
+            // Header
+            HStack(alignment: .top) {
+                Image("logo")
+//                    .resizable()
+//                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+//                    .scaledToFit()
+
+                Spacer()
+                VStack(alignment: .leading) {
                     Text(book.title)
-                        .font(.system(size: 25))
-                        .bold()
-                        .position(x: 75, y: -20)
-                    HStack {
-                        VStack {
-                            Text(book.author)
-                                .position(x: 70, y: -100)
-                            // todo: sub real values - rank is like not a thing? account for empty values
-                            Text(book.ranks_history.count > 0 ? "\(book.ranks_history[0].rank)": "n/a")
-                                .offset(y:-150)
-                                .font(.system(size: 15))
-                                .background(RoundedRectangle(cornerRadius: 20)
-                                            .fill(Color.green)
-                                            .frame(width: 140, height: 20)
-                                            .offset(x:-5, y: -150))
-                            
-                            Text(book.ranks_history.count > 0 ? book.ranks_history[0].list_name : "n/a")
-                                .offset(y:-130)
-                                .font(.system(size: 15))
-                                .background(
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(Color.orange)
-                                .frame(width: 140, height: 20)
-                                .offset(x:-5, y: -130)
+                        .font(Font.custom("Avenir", size: 22))
+                        .fontWeight(.bold)
+                    Text(book.author)
+                        .font(Font.custom("Avenir", size: 20))
+                        .padding(.bottom, 2.0)
+                    if (self.book.ranks_history.count > 0) {
+                        Text(self.book.ranks_history[0].list_name.lowercased())
+                            .font(Font.custom("Avenir", size: 15))
+                            .padding(.vertical, 5.0)
+                            .padding(/*@START_MENU_TOKEN@*/.horizontal, 10.0/*@END_MENU_TOKEN@*/)
+                            .background(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .fill(Color("Color4"))
                             )
-                            /*Text(book.age_group ?? "n/a")
-                                .offset(y:-20)
-                                .font(.system(size: 10))
-                                .background(
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(Color.yellow)
-                                .frame(width: 140, height: 20)
-                                .offset(x:-5, y: -20)
-
-                            )
-                             */
-                                
-                        }
                     }
-                    //HStack{
-                      //  Text(book.description ?? "coming soon")
-                            //.position(x: 60, y: -20)
-                   // }
-                    Text("Synopsis")
-                        .bold()
-                        .position(x: -47, y: -70)
-                    
-
-                    HStack{
-                        
-                        VStack {
-                            Button(action:{
-                                self.presentationMode.wrappedValue.dismiss()
-                                onDelete(id)
-                                self.textButton = "Removed"
-                            } ) {
-                                Text(textButton)
-                                    .padding(10)
-                                    .border(Color.red)
-                                    .foregroundColor(.red)
-                                    
-                                
-                            }
-                            .offset(x: -70, y: -5)
-                            Text("Details")
-                                .bold()
-                                .offset(x: -205, y: -170)
-                            
-                            Text(book.description ?? "coming soon")
-                            .position(x: 70, y: -250)
-                                .frame(width: 300)
-
-                        }
-     
-                    }
+                }
+            }
+            
+            // Synopsis
+            VStack(alignment: .leading) {
+                Text("SYNOPSIS")
+                    .font(Font.custom("Avenir", size: 15))
+                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .padding(.bottom, 5.0)
+                Text(book.description ?? "coming soon")
+                    .font(Font.custom("Avenir", size: 14))
+            }
+            .padding(.vertical)
+            .frame(maxWidth: .infinity, alignment: .topLeading)
+            
+            // Details
+            VStack(alignment: .leading) {
+                Text("DETAILS")
+                    .font(Font.custom("Avenir", size: 15))
+                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .padding(.bottom, 5.0)
+                if (self.book.ranks_history.count > 0) {
+                    Text("Published: \(self.book.ranks_history[0].published_date)")
+                        .font(Font.custom("Avenir", size: 14))
 
                 }
-                            
+                if (book.publisher != nil) {
+                    Text("Publisher: \(book.publisher!)")
+                        .font(Font.custom("Avenir", size: 14))
+                }
+                Text("ISBN: \(book.isbns[0].isbn13)")
+                    .font(Font.custom("Avenir", size: 14))
+                
+            }
+            .padding(.vertical)
+            .frame(maxWidth: .infinity, alignment: .topLeading)
+            
+            // Delete button
+            VStack {
+                Button(action:{
+                    self.presentationMode.wrappedValue.dismiss()
+                    onDelete(id)
+                } ) {
+                    Text("REMOVE FROM LIST")
+                        .padding(10)
+                        .foregroundColor(Color("buttonRed"))
+                        .font(Font.custom("Avenir", size: 20))
+                        .background(
+                            RoundedRectangle(cornerRadius: 7)
+                                .stroke(Color("buttonRed"), lineWidth: 1)
+                        )
+                }
             }
         }
+        .padding(.horizontal)
     }
-    
     
 }
        
 
-//struct DetailsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DetailsView(book: Book(title: "A GIRL'S GUIDE TO MOVING ON ", description: "A mother and her daughter-in-law both leave unhappy marriages and take up with new men.", author: "Debbie Macomber", price: "$27.99", age_group: "12", publisher: "NY Times", ranks_history: []), id: 1)
-//    }
-//}
+struct DetailsView_Previews: PreviewProvider {
+    static var previews: some View {
+        DetailsView(id: 1, book: Book(title: "A GIRL'S GUIDE TO MOVING ON ", description: "A mother and her daughter-in-law both leave unhappy marriages and take up with new men.", author: "Debbie Macomber", price: "$27.99", age_group: "12", publisher: "NY Times", isbns: [ISBN(isbn10: "12345", isbn13: "123456789")], ranks_history: [RankHistory(primary_isbn10:"0761156860",primary_isbn13:"9780761156864",rank:10,list_name:"Travel",display_name:"Travel",published_date:"2015-04-12",bestsellers_date:"2015-03-28",weeks_on_list:0,rank_last_week:0,asterisk:0,dagger:0)]), onDelete: {id in print(id)})
+    }
+}
